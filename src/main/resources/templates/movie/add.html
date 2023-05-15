@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript">
+	window.onload = e =>{
+		const button=document.getElementById("add");
+		const ul=document.getElementById("files");
+		
+		button.addEventListener("click",e =>{
+			const li =document.createElement("li");
+			const input=document.createElement("input");
+			
+			input.setAttribute("type","file");
+			input.setAttribute("name","uploadFile");
+			
+			li.append(input);
+			ul.append(li);
+		});
+	}
+</script>
+</head>
+<body>
+	<div>
+		<h3>영화 등록</h3>
+		<div>
+			<form method="post" enctype="multipart/form-data">
+				<div>
+					<label>영화명:</label>
+					<input type="text" name="title">
+				</div>
+				<div>
+					<label>감독:</label>
+					<input type="text" name="director">
+				</div>
+				<div>
+					<label>장르:</label>
+					<input type="text" name="genre">
+				</div>
+				<div>
+					<label>개봉일:</label>
+					<input type="date" name="openDate">
+				</div>
+				<div>
+					<label>첨부파일: <button type="button" id="add">추가</button></label>
+					
+					<ul id="files">
+						<li><input type="file" name="uploadFile"></li>
+					</ul>
+				</div>
+				<div>
+					<button>등록</button>
+					<a href="list"><button type="button">취소</button></a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

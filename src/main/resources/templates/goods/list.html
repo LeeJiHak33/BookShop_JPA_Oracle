@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<h3>상품 목록</h3>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>상품번호</th>
+						<th>상품명</th>
+						<th>제조사</th>
+						<th>가격</th>
+						<th>관리</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:if="${list.size() < 1}">
+						<td colspan="6">검색 된 상품이 없습니다.</td>
+					</tr>
+
+					<tr th:each="item : ${list}">
+						<td th:text="${item.goodsId}"></td>
+						<td th:text="${item.name}"></td>
+						<td th:text="${item.vendor}"></td>
+						<td th:text="${item.price}"></td>
+						<td><a th:href="@{ delete/{id} (id=${item.goodsId}) }">삭제</a>
+							<a th:href="@{update/{id}(id=${item.goodsId})}">변경</a></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">
+							<ol style="margin: 0"
+								class="pagination pagination-sm justify-content-center">
+
+								<li class="page-item"><a class="page-link"
+									th:href="@{?page=1{query}(query=${pager.query})}">처음</a></li>
+
+								<li class="page-item"><a class="page-link"
+									th:href="@{?page={page}{query} (page = ${pager.query}, query=${pager.query})}">
+										이전</a></li>
+
+
+
+								<li th:each="page : ${pager.list }"
+									class="page-item ${page eq pager.page  ? 'active' : '' }">
+									<a class="page-link"
+									th:href="@{?page=${page} {query} (page=${page}, query=${pager.query})}"
+									th:text="${page}"> </a>
+								</li>
+
+
+								<li class="page-item"><a class="page-link"
+									th:href="@{?page=${pager.next}(query = ${pager.query})}">
+										다음</a></li>
+								<li class="page-item"><a class="page-link"
+									th:href="@{?page=${pager.last}(query = ${pager.query})}">
+										마지막</a></li>
+							</ol>
+						</td>
+					</tr>
+
+				</tfoot>
+			</table>
+		</div>
+
+		<div>
+			<a href="add">등록</a>
+		</div>
+		<div>
+			<a href="dummy">대량 등록</a>
+		</div>
+		<div>
+			<a href="init">초기화</a>
+		</div>
+		<div>
+			<a href="../">처음으로</a>
+		</div>
+	</div>
+</body>
+</html>

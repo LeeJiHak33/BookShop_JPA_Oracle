@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<h3>영화 목록</h3>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>영화번호</th>
+						<th>영화명</th>
+						<th>감독</th>
+						<th>장르</th>
+						<th>개봉일</th>
+						<th>관리</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:if="${list.size() < 1}">
+						<td colspan="5">검색 된 영화가 없습니다.</td>
+					</tr>
+					
+					<tr th:each="item : ${list}">
+						<td th:text="${item.movieId}"></td>
+						<td ><a th:href="@{view/{id}(id=${item.movieId})}" th:text="${item.title}"></a></td>
+						<td th:text="${item.director}"></td>
+						<td th:text="${item.genre}"></td>
+						<td th:text="${item.openDate}"></td>
+						<td><a th:href="@{ delete/{id} (id=${item.movieId}) }">삭제</a> <a th:href="@{update/{id}(id=${item.movieId})}">변경</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div>
+			<a href="add">등록</a>
+			<a href="../">처음으로</a>
+		</div>
+	</div>
+</body>
+</html>

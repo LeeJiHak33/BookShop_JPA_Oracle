@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<h3>주문 변경</h3>
+		<div>
+			<form method="post">
+				<div>
+					<label>고객명:</label>
+					<select name="custid">
+						<option th:each="customer:${customers}" th:value="${customer.custid}" th:text="${customer.name}" th:selected="${customer.custid==item.custid}"></option>
+					</select>
+				</div>
+				<div>
+					<label>도서명:</label>
+						<select name="bookid">
+							<option th:each="book:${books}" th:value="${book.bookid}" th:text="${book.bookname}" th:selected="${book.bookid==item.bookid}"></option>
+						</select>
+				</div>
+				<div>
+					<label>구매 금액</label>
+					<input type="text" name="saleprice" th:value="${item.saleprice}">
+				</div>
+				
+				<div>
+					<button>변경</button>
+					<a href="list"><button type="button">취소</button></a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

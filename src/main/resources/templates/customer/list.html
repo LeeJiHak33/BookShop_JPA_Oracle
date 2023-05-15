@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<h3>고객 목록</h3>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>고객번호</th>
+						<th>고객명</th>
+						<th>주소</th>
+						<th>전화번호</th>
+						<th>관리</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:if="${list.size() < 1}">
+						<td colspan="5">검색 된 고객가 없습니다.</td>
+					</tr>
+					
+					<tr th:each="item : ${list}">
+						<td th:text="${item.custid}"></td>
+						<td th:text="${item.name}"></td>
+						<td th:text="${item.address}"></td>
+						<td th:text="${item.phone}"></td>
+						<td><a th:href="@{ delete/{id} (id=${item.custid}) }">삭제</a> <a th:href="@{update/{id}(id=${item.custid})}">변경</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div>
+			<a href="add">등록</a>
+			<a href="../">처음으로</a>
+		</div>
+	</div>
+</body>
+</html>
